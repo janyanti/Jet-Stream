@@ -1,0 +1,39 @@
+{
+  "name": "jet_stream",
+  "version": "0.1.0",
+  "main": "public/main.js",
+  "hompage": "./",
+  "private": true,
+  "dependencies": {
+    "electron-is-dev": "^0.3.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-scripts": "1.1.4"
+  },
+  "devDependencies": {
+    "concurrently": "^3.6.0",
+    "electron": "^2.0.3",
+    "electron-builder": "^20.17.1",
+    "wait-on": "^2.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron-start": "electron .",
+    "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-pack": "npm run build - em.main=build/main.js",
+    "preelectron-pack": "npm build"
+  },
+  "build": {
+    "appId": "com.jet_stream",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assests"
+    }
+  }
+}
