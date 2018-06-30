@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Form, Container, Loader, Dimmer } from 'semantic-ui-react';
+import { Button, Form, Icon, Container, Segment } from 'semantic-ui-react';
 // import XMLHttpRequest from 'xmlhttprequest';
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 class LoginForm extends Component {
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -39,15 +39,16 @@ class LoginForm extends Component {
   render(){
     return (
       //Form for API call authentification
-      // <Container>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Input label='Username:' placeholder='username'/>
-          <Form.Input type='password' label='Password:' name='secret' placeholder='password'/>
-          <Form.Button size='huge' color='purple' >Submit</Form.Button>
-          <Loader className='login_loader' visible size='big' inline='centered'>Loading</Loader>
-        </Form>
-
-      // </Container>
+      <Container>
+        <Segment>
+          <Form size='huge' onSubmit={this.handleSubmit}>
+            <Form.Input label='Username' placeholder='username'/>
+            <Form.Input label='Password' type='password' placeholder='password'/>
+            <Form.Button size='big' color='grey' >Submit</Form.Button>
+            <Icon loading color='purple'name='sync' />
+          </Form>
+        </Segment>
+      </Container>
     )
   }
 }

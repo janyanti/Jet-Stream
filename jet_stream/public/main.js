@@ -6,9 +6,10 @@ const BrowserWindow = electron.BrowserWindow;
 
 let mainWindow
 let winOptions = {
-  width: 900,
-  height: 680,
-  backgroundColor: '#9400D3'
+  width: 1368,
+  height: 800,
+  backgroundColor: '#7030A0',
+
 }
 let aboutOptions = {
   applicationName: 'Jet Stream',

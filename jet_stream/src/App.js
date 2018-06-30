@@ -34,17 +34,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App" align='center'>
-        <Grid divided='vertically'>
-          <Grid.Row columns={2}>
-            <Grid.Column>
-              <LoginForm idToken={this.authenticateUser.bind(this)} />
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="/src/images/Jet-Stream-Side.png" />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+      <div className="App">
+        <LoginForm idToken={this.authenticateUser.bind(this)} />
+        <br/><h3 align='center'>Streamling your jet business</h3><br/>
+        <Image fluid src={require('./Jet-Stream-logo-1.png')}/>
       </div>
     );
     }
