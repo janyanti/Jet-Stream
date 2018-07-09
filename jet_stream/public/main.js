@@ -6,7 +6,7 @@ const BrowserWindow = electron.BrowserWindow;
 
 let mainWindow
 let winOptions = {
-  width: 1368,
+  width: 1380,
   height: 800,
   backgroundColor: '#7030A0',
 

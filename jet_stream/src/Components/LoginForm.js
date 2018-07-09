@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Form, Icon, Container, Segment } from 'semantic-ui-react';
-// import XMLHttpRequest from 'xmlhttprequest';
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+import { Form, Icon, Container, Segment } from 'semantic-ui-react';
+import {authenticateUser}  from './jetStream.jsx'
+
 
 class LoginForm extends Component {
 
@@ -12,29 +12,7 @@ class LoginForm extends Component {
   }
 
   handleSubmit = (event) => {
-  // Collect user input from form values
-    event.preventDefault();
-    const user = event.target[0].value;
-    const secret = event.target[1].value;
-    const body = JSON.stringify({
-      'user': user,
-      'pass': secret
-    });
-    if ((user && secret)){
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', 'https://merchant-api.jet.com/api/token', true );
-      xhr.setRequestHeader('Content-type', 'application/json')
-      xhr.onload = () => {
-          var res = JSON.parse(xhr.responseText);
-          // console.log(res)
-          res.login_body = body
-          this.props.idToken(res)
-         }
-      xhr.send(body);
-
-    }
-      else {alert('Username and Password are both required');}
-
+    authenticateUser(event, this.props);
 }
   render(){
     return (
