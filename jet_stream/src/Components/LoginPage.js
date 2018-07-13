@@ -9,7 +9,7 @@ class LoginPage extends Component {
       <div className="LoginPage">
         <br/>
         <LoginForm />
-        <br/><h3 align='center'>Streamling your jet business</h3>
+        <h3 align='center'>Streamling your jet business</h3>
         <Image fluid src={require('../Jet-Stream-logo-1.png')}/>
       </div>
     );

@@ -1,5 +1,9 @@
-import React, { Component } from 'react'
-import { Icon, Segment, Sidebar, Menu } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Route, NavLink, HashRouter } from "react-router-dom";
+import { Icon, Segment, Sidebar, Menu } from 'semantic-ui-react';
+import ProductsPage from './ProductsPage';
+import ShippingPage from './ShippingPage';
+import LoginPage from './LoginPage';
 
 class MenuSidebar extends Component{
 
@@ -9,36 +13,41 @@ class MenuSidebar extends Component{
 
   render(){
     const visible = this.props.visible
+    const content = this.props.content
 
     return(
-      <Sidebar.Pushable className='sidebar-container'>
-        <Sidebar
-        as={Menu}
-            animation='overlay'
-            icon='labeled'
-            // inverted
-            onHide={this.handleSidebarHide}
-            vertical
-            visible={visible}
-            width='thin'
-          >
-          <Menu.Item as='a' >
-              <Icon name='cube' />
-              Products
-          </Menu.Item>
-          <Menu.Item as='a' >
-              <Icon name='shipping fast' />
-              Shipping
-          </Menu.Item>
-          <Menu.Item as='a' >
-              <Icon name='options' />
-              Options
-          </Menu.Item>
-        </Sidebar>
-        <Sidebar.Pusher>
-          {this.props.content}
-        </Sidebar.Pusher>
-      </Sidebar.Pushable>
+      <HashRouter>
+        <Sidebar.Pushable className='sidebar-container'>
+          <Sidebar
+          as={Menu}
+              animation='scale down'
+              icon='labeled'
+              // inverted
+              onHide={this.handleSidebarHide}
+              vertical
+              visible={visible}
+              width='thin'
+            >
+            <Menu.Item as='a' href='#/ProductsPage'>
+                <Icon name='cube' />
+                Products
+            </Menu.Item>
+            <Menu.Item as='a' href='#/ShippingPage'>
+                <Icon name='shipping fast' />
+                Shipping
+            </Menu.Item>
+            <Menu.Item as='a' href='#/'>
+                <Icon name='options' />
+                Options
+            </Menu.Item>
+          </Sidebar>
+          <Sidebar.Pusher>
+            <Route exact path='/' component={LoginPage}/>
+            <Route exact path='/ProductsPage' component={ProductsPage}/>
+            <Route exact path='/ShippingPage' component={ShippingPage}/>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+      </HashRouter>
     )
   }
 
