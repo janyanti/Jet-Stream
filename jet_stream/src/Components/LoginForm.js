@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Container, Segment } from 'semantic-ui-react';
-import {authenticateUser}  from './jetStream.jsx'
-
+import { authenticateUser }  from './jetStream.jsx'
 
 class LoginForm extends Component {
 
