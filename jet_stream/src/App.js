@@ -51,8 +51,6 @@ class App extends Component {
       </Menu>
 
       <MenuSidebar content={<LoginPage/>} visible={this.state.menuVisible}/>
-
-
       </div>
     );
     }
