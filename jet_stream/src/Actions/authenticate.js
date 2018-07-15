@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import axios from 'axios'
 
 var auth_init = {
-  url: 'https://merchant-api.jet.com/api/token',
+  url: 'https://merchant-api.jet.com/api/tokens',
   method: 'POST',
   headers: { 'Content-Type': 'application/json' }
 }

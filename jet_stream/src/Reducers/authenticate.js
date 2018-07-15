@@ -2,9 +2,9 @@
 const defaultState = {
     auth_creds: '',
     id_token: '',
-    authorizing: true,
+    authorizing: false,
     authorized: false,
-    auth_error: null
+    error: null
   };
 
 const authenticateReducer = (state=defaultState, action) =>{
@@ -17,7 +17,7 @@ const authenticateReducer = (state=defaultState, action) =>{
       return {...state, id_token:data.id_token, creds:data.creds, authorizing:false, authorized:true}
     }
     case 'AUTH_USER_REJECTED':{
-      return {...state, authorizing:false, authorized:false, auth_error:data.error}
+      return {...state, authorizing:false, authorized:false, error:data.error}
     }
     default:
       return state;

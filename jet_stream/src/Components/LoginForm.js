@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Icon, Container, Segment } from 'semantic-ui-react';
+import { Form, Icon, Container, Segment, Message } from 'semantic-ui-react';
 
 class LoginForm extends Component {
   constructor(props){
@@ -24,10 +24,20 @@ class LoginForm extends Component {
 }
 
   render(){
+    const error = this.props.error
+    let error_message = null
+    if (error) { error_message = (
+    <Message negative
+    icon='exclamation circle'
+    header='Login Failed'
+    content='The username and password do not match.'
+  />)}
+
     return (
       //Form for API call authentification
       <Container>
         <Segment>
+          {error_message}
           <Form size='huge' onSubmit={this.onSubmit}>
             <Form.Input label='Username' placeholder='username' name='user' onChange={this.onChange}/>
             <Form.Input label='Password' type='password' placeholder='password' name='pass' onChange={this.onChange}/>
