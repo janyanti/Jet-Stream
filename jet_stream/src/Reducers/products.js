@@ -4,7 +4,8 @@ const defaultState = {
   sku_urls: [],
   products: [],
   sku_error: null,
-  prod_error: null
+  prod_error: null,
+  table_content: []
 }
 
 const productsReducer = (state=defaultState, action) => {
@@ -26,7 +27,10 @@ const productsReducer = (state=defaultState, action) => {
       return {...state, fething:false, fetched:false, sku_error: data.prod_error}
     }
     case 'FETCH_PROD_DATA_FULFILLED':{
-      return {...state, fething:true,  fetch:true, products:data.products}
+      return {...state, fething:true,  fetch:true, products:data.products, table_content: data.table_content}
+    }
+    case 'FORMAT_PROD_TABLE':{
+      return {...state, table_content: data.table_content}
     }
     default: return state
 

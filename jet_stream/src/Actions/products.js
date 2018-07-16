@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { jsonFilter } from '../Components/jetStream'
 
 const JET_DEFAULTS = {
   headers:{
@@ -20,6 +21,7 @@ var headers = {
 export const fetchProducts = (id_token) =>{
   let sku_urls = [];
   let products = [];
+  let table_data = [];
   headers.Authorization = `bearer ${id_token}`
   return ( dispatch  =>{
   dispatch({type: 'FETCH_PROD_SKUS_PENDING' })
@@ -30,14 +32,31 @@ export const fetchProducts = (id_token) =>{
       dispatch({type: 'FETCH_PROD_DATA_PENDING'})
       sku_urls.forEach( sku =>{
         JET.get(sku, {headers})
-          .then( res  => products.push(res.data))
+          .then( res  => {
+            products.push(res.data)
+            table_data.push(jsonFilter(res.data, 'table'))
+          })
           .catch( err  =>{
             dispatch({type:'FETCH_PROD_DATA_REJECTED', payload: {prod_error: err} })
           })});
-      dispatch({type: 'FETCH_PROD_DATA_FULFILLED', payload:{products: products} })
+      dispatch({type: 'FETCH_PROD_DATA_FULFILLED', payload:{products: products, table_content: table_data} })
     })
     .catch( err  =>{
       dispatch({type:'FETCH_PROD_SKUS_REJECTED', payload: {sku_error: err} })
     })
+    // .then(() => {
+    //   products.forEach( elem => {
+    //     table_data.push(jsonFilter(elem,'table'))
+    //   })
+    //   dispatch({type: 'FORMAT_PROD_TABLE', payload:{ table_content:table_data }})
+    // })
   })
 }
+
+export const formatProductsTable = (product_data) =>{
+    let data = product_data.map( elem => { return jsonFilter(elem,'table')})
+    return {
+      type: 'FORMAT_PROD_TABLE',
+      payload: { table_content: data }
+    }
+  }

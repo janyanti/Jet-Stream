@@ -1,6 +1,12 @@
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var bearer_token = ''
 const card_properties = ['main_image_url','price','quantity','product_title','status','product_description','shipping_weight_pounds']
+const table_properties = ['main_image_url','price','quantity','product_title','status','merchant_sku']
+
+const properties = {
+  card: card_properties,
+  table: table_properties
+}
 
 
 // recusively find json data
@@ -30,14 +36,17 @@ function jsonRecurse(json_obj, target){
   }
 
 // Take in json object and returns a json object filtered by targets list
-export function jsonFilter(data, targets){
+export function jsonFilter(data, target){
+  let targets = properties[target]
   let result = {}
   let len = targets.length
   for (let i = 0; i < len ; i++ ) {
-    let target = targets[i]
+    let key = targets[i]
     // Need to update to handle undefined values
-    result[target] = jsonRecurse(data, target)
+    result[key] = jsonRecurse(data, key);
+    result.id = i;
   }
+  // console.log(result)
   return result
 }
 

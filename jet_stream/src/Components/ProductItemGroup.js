@@ -9,7 +9,7 @@ class ProductItemGroup extends Component {
 
   render(){
     const items = this.props.items;
-    let lists = this.props.items.map((item) =>
+    let lists = this.props.items.map( item =>
       <ProductItem item={item}/>
     );
     console.log(lists)

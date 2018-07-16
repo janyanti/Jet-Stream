@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
-import { fetchProducts } from '../Actions/products'
+import { fetchProducts, formatProductsTable } from '../Actions/products'
 import { connect } from 'react-redux';
+import ProductsTable from './ProductsTable';
+import { jsonFilter } from './jetStream';
 
 class ProductsPage extends Component {
 
   constructor(props){
     super(props);
+    this.state = {}
+    this.loadProducts = this.loadProducts.bind(this)
+    this.formatTable = this.formatTable.bind(this)
   }
 
-  componentDidMount(){
+  loadProducts = () =>{
     const id_token = this.props.auth.id_token;
     this.props.fetchProducts(id_token);
   }
-  render(){
 
+  formatTable = () =>{
+    const product_data = this.props.prod.products
+    this.props.formatProductsTable(product_data)
+  }
+
+
+  componentDidMount(){
+    this.loadProducts()
+  }
+
+  render(){
     return(
-      <h1>Products Page</h1>
+      <div className='product-table'>
+        <h2>Products Manager</h2>
+        <ProductsTable table_content={this.props.prod.table_content}/>
+      </div>
     )
   }
 
@@ -28,4 +46,11 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, { fetchProducts })(ProductsPage);
+ const mapDispatchToProps = dispatch => {
+   return {
+     fetchProducts: (id_token) => dispatch(fetchProducts(id_token)),
+     formatProductsTable: (data) => dispatch(formatProductsTable(data))
+   }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage);
