@@ -28,7 +28,7 @@ class MenuSidebar extends Component{
               visible={visible}
               width='thin'
             >
-            <Menu.Item as='a' href='#/ProductsPage'>
+            <Menu.Item as='a' href='#/ProductsPage' id='menu_product'>
                 <Icon name='cube' />
                 Products
             </Menu.Item>

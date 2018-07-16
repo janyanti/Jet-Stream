@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { fetchProducts } from '../Actions/products'
+import { connect } from 'react-redux';
 
 class ProductsPage extends Component {
 
@@ -6,6 +8,10 @@ class ProductsPage extends Component {
     super(props);
   }
 
+  componentDidMount(){
+    const id_token = this.props.auth.id_token;
+    this.props.fetchProducts(id_token);
+  }
   render(){
 
     return(
@@ -15,5 +21,11 @@ class ProductsPage extends Component {
 
 }
 
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    prod: state.prod
+    }
+  }
 
-export default ProductsPage
+export default connect(mapStateToProps, { fetchProducts })(ProductsPage);
