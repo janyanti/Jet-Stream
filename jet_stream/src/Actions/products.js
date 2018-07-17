@@ -30,16 +30,19 @@ export const fetchProducts = (id_token) =>{
       sku_urls = res.data.sku_urls
       dispatch({type: 'FETCH_PROD_SKUS_FULFILLED', payload:{sku_urls:sku_urls} })
       dispatch({type: 'FETCH_PROD_DATA_PENDING'})
+      console.log('fetching products...')
       sku_urls.forEach( sku =>{
         JET.get(sku, {headers})
           .then( res  => {
             products.push(res.data)
-            table_data.push(jsonFilter(res.data, 'table'))
+            // table_data.push(jsonFilter(res.data, 'table'))
           })
           .catch( err  =>{
             dispatch({type:'FETCH_PROD_DATA_REJECTED', payload: {prod_error: err} })
           })});
-      dispatch({type: 'FETCH_PROD_DATA_FULFILLED', payload:{products: products, table_content: table_data} })
+      console.log(`Here are my products: ${products}`)
+      dispatch({type: 'FETCH_PROD_DATA_FULFILLED', payload:{products: products, table_content: table_data} });
+      dispatch(formatProductsTable(products))
     })
     .catch( err  =>{
       dispatch({type:'FETCH_PROD_SKUS_REJECTED', payload: {sku_error: err} })
@@ -54,7 +57,9 @@ export const fetchProducts = (id_token) =>{
 }
 
 export const formatProductsTable = (product_data) =>{
-    let data = product_data.map( elem => { return jsonFilter(elem,'table')})
+    console.log('formatting table data')
+    let data = product_data.map( (elem, index) => { return jsonFilter(elem,'table', index)})
+    console.log(data)
     return {
       type: 'FORMAT_PROD_TABLE',
       payload: { table_content: data }

@@ -24,13 +24,7 @@ class ProductsTable extends Component {
 
   render(){
     let content = this.props.table_content;
-    let table_content = null
-    // console.log(content)
-    // let table_content = null;
-    if (content) {let table_content = content.map( item => <TableRow item={item}/>); }
-    // console.log(table_content, content)
     if (content && content.length >= 1 ){
-      console.log(content)
       return(
           <Table celled compact>
             <Table.Header>
@@ -46,7 +40,7 @@ class ProductsTable extends Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              <TableRow item={content[0]}/>
+              {content.map( item => <TableRow key={item.id} item={item}/>) }
             </Table.Body>
           </Table>
 

@@ -36,7 +36,7 @@ function jsonRecurse(json_obj, target){
   }
 
 // Take in json object and returns a json object filtered by targets list
-export function jsonFilter(data, target){
+export function jsonFilter(data, target, id=0){
   let targets = properties[target]
   let result = {}
   let len = targets.length
@@ -44,7 +44,7 @@ export function jsonFilter(data, target){
     let key = targets[i]
     // Need to update to handle undefined values
     result[key] = jsonRecurse(data, key);
-    result.id = i;
+    result.id = id;
   }
   // console.log(result)
   return result
