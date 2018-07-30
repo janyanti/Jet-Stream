@@ -3,6 +3,7 @@ import LoginForm from './LoginForm';
 import { Image, Segment, Icon, Dimmer } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { authenticateUser }  from '../Actions/authenticate'
+import AddProduct from './Products/AddProduct'
 
 
 class LoginPage extends Component {
@@ -16,6 +17,7 @@ class LoginPage extends Component {
         <LoginForm onFormSubmit={this.props.authenticateUser} error={auth.error}/>
         <h3 align='center'>Streamling your jet business</h3>
         <Image fluid src={require('../Jet-Stream-logo-1.png')}/>
+        <AddProduct/>
       </div>);
     }
     return (

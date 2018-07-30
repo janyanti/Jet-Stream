@@ -25,14 +25,14 @@ class ProductsPage extends Component {
 
 
   componentDidMount(){
-    this.loadProducts()
+    this.loadProducts();
   }
 
   render(){
     return(
       <div className='product-table'>
         <h2>Products Manager</h2>
-        <ProductsTable table_content={this.props.prod.table_content}/>
+        <ProductsTable onLoad={this.formatTable} table_content={this.props.prod.table_content}/>
       </div>
     )
   }

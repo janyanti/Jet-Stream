@@ -46,7 +46,7 @@ class ProductsTable extends Component {
 
       )
   }
-  return (<div><h1>Loading</h1></div>)
+  return (<button type="button" onClick={this.props.onLoad}>Load</button>)
  }
 }
 

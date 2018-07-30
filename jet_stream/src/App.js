@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image, Sidebar, Icon, Menu, Segment } from 'semantic-ui-react';
 import LoginPage from './Components/LoginPage';
 import MenuSidebar from './Components/MenuSidebar';
+import AddProduct from './Components/Products/AddProduct';
 import './App.css';
 
 class App extends Component {
